@@ -2,7 +2,7 @@
 import wollok.game.*
 import ingeniero.*
 
-object movimiento {
+object movimiento { //aca no hay q hacer nada, simplemente hicimos el movimiento
 	
 	method configurarFlechas(visual){
 		keyboard.up().onPressDo{ self.mover(arriba,visual)}
@@ -11,24 +11,24 @@ object movimiento {
 		keyboard.right().onPressDo{ self.mover(derecha,visual)}
    }
 	
-	method mover(direccion,personaje){
-		personaje.position(direccion.siguiente(ingeniero.position()))
+	method mover(direccion,ingeniero){
+		ingeniero.position(direccion.siguiente(ingeniero.position()))
 	}	
 	
 }
 
 object izquierda { 
-	method siguiente(position) = position.left(1) 
+	method siguiente(position) = position.left(10) 
 }
 
 object derecha { 
-	method siguiente(position) = position.right(1) 
+	method siguiente(position) = position.right(10) 
 }
 
 object abajo { 
-	method siguiente(position) = position.down(1) 
+	method siguiente(position) = position.down(10) 
 }
 
 object arriba { 
-	method siguiente(position) = position.up(1) 
+	method siguiente(position) = position.up(10) 
 }

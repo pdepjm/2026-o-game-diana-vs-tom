@@ -3,11 +3,12 @@ import haskell.*
 
 object ingeniero {
 
-  method position() = game.center()
-  const property image = "ingeniero.jpeg"
+  var property position = game.origin()
+  method image() = "Ingeniero.gif"
 
 
-  
+
+//----------------------------------------------------------------------------------------------
   var vida = 1000 // en corazones
 
   method recibirAtaque(){
