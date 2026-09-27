@@ -1,3 +1,5 @@
+import utnianos.*
+import obstaculo.*
 
 import wollok.game.*
 import ingeniero.*
@@ -11,7 +13,8 @@ program juego {
 
   game.addVisual(ingeniero)
   movimiento.configurarFlechas(ingeniero)
-  
+  game.addVisual(banco1)
+  game.addVisual(utnianos)
 
   game.boardGround('tablero.jpeg')
 
