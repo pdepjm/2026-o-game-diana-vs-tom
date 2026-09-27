@@ -1,0 +1,24 @@
+
+import wollok.game.*
+import ingeniero.*
+import movimiento.*
+
+program juego {
+  game.width(100)
+  game.height(100)
+  game.cellSize(50)
+  game.title("Juego")
+
+  game.addVisual(ingeniero)
+  movimiento.configurarFlechas(ingeniero)
+  
+
+  game.boardGround('tablero.jpeg')
+
+
+  game.start()
+
+}
+
+
+
