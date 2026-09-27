@@ -3,8 +3,15 @@ import haskell.*
 
 object ingeniero {
 
-  var property position = game.origin()
-  method image() = "Ingeniero.gif"
+  var property position = game.center()
+
+//para que empiece quieto
+  var caminando = false
+//condicion para que camine (que se active el gif)
+  method image() = if (caminando) "final.gif" else "ingeniero_quieto.png"
+
+  method empezarACaminar() { caminando = true }
+  method dejarDeCaminar() { caminando = false }
 
 
 
