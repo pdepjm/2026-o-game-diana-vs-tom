@@ -1,6 +1,4 @@
-import utnianos.*
-import obstaculo.*
-
+import escenario.*
 import wollok.game.*
 import ingeniero.*
 import movimiento.*
