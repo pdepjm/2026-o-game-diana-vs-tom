@@ -4,18 +4,25 @@ import ingeniero.*
 import movimiento.*
 
 program juego {
-  game.width(100)
-  game.height(100)
+  game.width(160)
+  game.height(90)
   game.cellSize(50)
   game.title("Juego")
 
   game.addVisual(ingeniero)
   movimiento.configurarFlechas(ingeniero)
   game.addVisual(banco1)
+  game.addVisual(banco2)
+  game.addVisual(mesa1)
+  game.addVisual(mesa2)
   game.addVisual(utnianos)
 
   game.boardGround('tablero.jpeg')
 
+  game.onCollideDo(ingeniero, { 
+   elemento => elemento.serAgarradoPor(ingeniero)
+   game.say(ingeniero, "Sume una energia")
+  })
 
   game.start()
 

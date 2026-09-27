@@ -1,3 +1,4 @@
+import escenario.*
 
 import wollok.game.*
 import ingeniero.*
@@ -6,9 +7,9 @@ object movimiento {
 
 	//Limite del tablero, margenes
     const limiteMinX = 1
-    const limiteMaxX = 100
+    const limiteMaxX = 140
     const limiteMinY = 1
-    const limiteMaxY = 85
+    const limiteMaxY = 70
 
     method configurarFlechas(visual){
 //aca configuramos que si se toca una tecla de flecha, se mueve el personaje
@@ -36,10 +37,11 @@ object movimiento {
         }
     }
 
-
+// comprueba que la posición esté entre los límites y no tenga un obstáculo
     method esPosicionValida(position) =
         position.x() >= limiteMinX and position.x() <= limiteMaxX and
-        position.y() >= limiteMinY and position.y() <= limiteMaxY
+        position.y() >= limiteMinY and position.y() <= limiteMaxY and
+        not(sistemaDeObstaculos.estaOcupado(position))
 
 }
 

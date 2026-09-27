@@ -3,7 +3,7 @@ import haskell.*
 
 object ingeniero {
 
-  var property position = game.center()
+  var property position = game.at(120, 20)
 
 //para que empiece quieto
   var caminando = false
@@ -25,6 +25,10 @@ object ingeniero {
 
   var energia = 200 //si tiene menos del 50% de energia, esta cansado-->pega un 25% menos
   method sueño(cantidad) { energia = energia-cantidad } // si energia<0 se duerme, osea muere xd
+  
+  method sumarEnergia(nuevaEnergia){
+  energia = energia + nuevaEnergia
+}
 
   var property ataque = 100
   method ataque() = ataque
