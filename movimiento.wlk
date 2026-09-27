@@ -2,33 +2,29 @@
 import wollok.game.*
 import ingeniero.*
 
-object movimiento { //aca no hay q hacer nada, simplemente hicimos el movimiento
-	
-	method configurarFlechas(visual){
-		keyboard.up().onPressDo{ self.mover(arriba,visual)}
-		keyboard.down().onPressDo{ self.mover(abajo,visual)}
-		keyboard.left().onPressDo{ self.mover(izquierda,visual)}
-		keyboard.right().onPressDo{ self.mover(derecha,visual)}
-   }
-	
-	method mover(direccion,ingeniero){
-		ingeniero.position(direccion.siguiente(ingeniero.position()))
-	}	
-	
-}
+object movimiento {
 
-object izquierda { 
-	method siguiente(position) = position.left(10) 
-}
+    const limiteMinX = 1
+    const limiteMaxX = 100
+    const limiteMinY = 1
+    const limiteMaxY = 85
 
-object derecha { 
-	method siguiente(position) = position.right(10) 
-}
+    method configurarFlechas(visual){
+        keyboard.up().onPressDo{ self.mover(arriba,visual)}
+        keyboard.down().onPressDo{ self.mover(abajo,visual)}
+        keyboard.left().onPressDo{ self.mover(izquierda,visual)}
+        keyboard.right().onPressDo{ self.mover(derecha,visual)}
+    }
 
-object abajo { 
-	method siguiente(position) = position.down(10) 
-}
+    method mover(direccion, ingeniero){
+        const nuevaPosicion = direccion.siguiente(ingeniero.position())
+        if (self.esPosicionValida(nuevaPosicion)) {
+            ingeniero.position(nuevaPosicion)
+        }
+    }
 
-object arriba { 
-	method siguiente(position) = position.up(10) 
+    method esPosicionValida(position) =
+        position.x() >= limiteMinX and position.x() <= limiteMaxX and
+        position.y() >= limiteMinY and position.y() <= limiteMaxY
+
 }
