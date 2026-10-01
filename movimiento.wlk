@@ -12,6 +12,8 @@ object movimiento {
     const limiteMaxY = 70
 
     method configurarFlechas(visual){
+        //whilePresseDo
+
 //aca configuramos que si se toca una tecla de flecha, se mueve el personaje
         keyboard.up().onPressDo{ self.mover(arriba,visual)}
         keyboard.down().onPressDo{ self.mover(abajo,visual)}
