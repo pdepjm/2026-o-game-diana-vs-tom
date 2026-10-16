@@ -14,20 +14,15 @@ object movimiento {
     method configurarFlechas(visual){
         //whilePresseDo
 
-//aca configuramos que si se toca una tecla de flecha, se mueve el personaje
-        keyboard.up().onPressDo{ self.mover(arriba,visual)}
-        keyboard.down().onPressDo{ self.mover(abajo,visual)}
-        keyboard.left().onPressDo{ self.mover(izquierda,visual)}
-        keyboard.right().onPressDo{ self.mover(derecha,visual)}
-    
-	
-//lo que hace es que dependiendo si lo tocas se activa el movimiento del personaje (gif)
- 		keyboard.up().onReleaseDo{ visual.dejarDeCaminar() }
-        keyboard.down().onReleaseDo{ visual.dejarDeCaminar() }
-        keyboard.left().onReleaseDo{ visual.dejarDeCaminar() }
-        keyboard.right().onReleaseDo{ visual.dejarDeCaminar() }
+keyboard.up().whilePressedDo({ self.mover(arriba, visual) }, 300)
+keyboard.down().whilePressedDo({ self.mover(abajo, visual) }, 300)
+keyboard.left().whilePressedDo({ self.mover(izquierda, visual) }, 300)
+keyboard.right().whilePressedDo({ self.mover(derecha, visual) }, 300)
 
-	}
+keyboard.up().onReleaseDo{ visual.dejarDeCaminar() }
+keyboard.down().onReleaseDo{ visual.dejarDeCaminar() }
+keyboard.left().onReleaseDo{ visual.dejarDeCaminar() }
+keyboard.right().onReleaseDo{ visual.dejarDeCaminar() }}
 	
 
 //aca definimos personaje por expresividad, tranquilamente podría haber sido ingeniero
