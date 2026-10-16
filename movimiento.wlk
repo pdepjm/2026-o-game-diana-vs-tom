@@ -20,6 +20,8 @@ object movimiento {
         keyboard.down().onReleaseDo{ personaje.dejarDeCaminar() }
         keyboard.left().onReleaseDo{ personaje.dejarDeCaminar() }
         keyboard.right().onReleaseDo{ personaje.dejarDeCaminar() }
+
+        keyboard.space().whilePressedDo({personaje.disparar()}, 300)
     }
 
     // La posición tiene que estar dentro de los límites y sin obstáculo

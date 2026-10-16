@@ -1,5 +1,5 @@
 import movimiento.*
-
+import proyectiles.*
 class EfectoMuerte {
     var property position
     method image() = "caida.gif"
@@ -9,6 +9,7 @@ class Personaje {
     var property position
     var caminando = false
     var property vida
+    var property direccionActual = derecha
     method image()
 
     method empezarACaminar() { caminando = true }
@@ -17,13 +18,18 @@ class Personaje {
 
     method mover(direccion) {
         self.empezarACaminar()
+        direccionActual = direccion
         const nuevaPosicion = direccion.siguiente(position)
         if (movimiento.esPosicionValida(nuevaPosicion)) {
             position = nuevaPosicion
         }
     }
-    
-     
+    method disparar(){
+        const proyectil = new Proyectil(position = position, emisor = self, direccion = direccionActual)
+        proyectil.disparar()
+        
+    }
+        
 
   method recibirAtaque(atacante) {
         vida = (vida - atacante.ataque()).max(0)

@@ -1,5 +1,5 @@
 
-import enemigo.*
+import enemigos.*
 import personaje.*
 import movimiento.*
 
@@ -15,7 +15,7 @@ object ingeniero inherits Personaje(position = game.at(120, 20), vida = 1000) {
     else "ingeniero_quieto.png"
 
 
-    var energia = 1000
+    var property energia = 1000
     var property ataque = 200
 
     method empezarACansarse() {

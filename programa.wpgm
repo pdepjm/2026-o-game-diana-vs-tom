@@ -3,6 +3,7 @@ import wollok.game.*
 import ingeniero.*
 import movimiento.*
 import enemigos.*
+import proyectiles.* 
 
 program juego {
   game.width(160)
@@ -23,14 +24,18 @@ program juego {
 
   game.onCollideDo(ingeniero, { 
    elemento => elemento.serAgarradoPor(ingeniero)
-   game.say(ingeniero, "Sume una energia")
+
   })
 
-  game.onTick(500, "movimientoHaskell", {haskell.moverseAlAzar()})
+  game.onTick(10000, "movimientoHaskell", {haskell.moverseAlAzar()})
+
+// no creo que esto esté bien pero no se me ocurrio otra forma
+  game.onTick(100, "atacarEnSuPosicion", {haskell.atacarEnSuPosicion()})
 
   game.start()
 
 }
+
 
 
 
