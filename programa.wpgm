@@ -2,6 +2,7 @@ import escenario.*
 import wollok.game.*
 import ingeniero.*
 import movimiento.*
+import enemigos.*
 
 program juego {
   game.width(160)
@@ -16,6 +17,7 @@ program juego {
   game.addVisual(mesa1)
   game.addVisual(mesa2)
   game.addVisual(utnianos)
+  game.addVisual(haskell)
 
   game.boardGround('tablero.jpeg')
 
@@ -23,6 +25,8 @@ program juego {
    elemento => elemento.serAgarradoPor(ingeniero)
    game.say(ingeniero, "Sume una energia")
   })
+
+  game.onTick(500, "movimientoHaskell", {haskell.moverseAlAzar()})
 
   game.start()
 
