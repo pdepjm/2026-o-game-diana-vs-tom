@@ -11,17 +11,17 @@ object movimiento {
     const limiteMaxY = 70
 
     method configurarFlechas(personaje) {
-        keyboard.up().whilePressedDo({ personaje.mover(arriba) }, 300)
-        keyboard.down().whilePressedDo({ personaje.mover(abajo) }, 300)
-        keyboard.left().whilePressedDo({ personaje.mover(izquierda) }, 300)
-        keyboard.right().whilePressedDo({ personaje.mover(derecha) }, 300)
+        keyboard.up().whilePressedDo({ personaje.mover(arriba) }, 400)
+        keyboard.down().whilePressedDo({ personaje.mover(abajo) }, 400)
+        keyboard.left().whilePressedDo({ personaje.mover(izquierda) }, 400)
+        keyboard.right().whilePressedDo({ personaje.mover(derecha) }, 400)
 
         keyboard.up().onReleaseDo{ personaje.dejarDeCaminar() }
         keyboard.down().onReleaseDo{ personaje.dejarDeCaminar() }
         keyboard.left().onReleaseDo{ personaje.dejarDeCaminar() }
         keyboard.right().onReleaseDo{ personaje.dejarDeCaminar() }
 
-        keyboard.space().whilePressedDo({personaje.disparar()}, 300)
+        keyboard.space().whilePressedDo({personaje.disparar()}, 400)
     }
 
     // La posición tiene que estar dentro de los límites y sin obstáculo

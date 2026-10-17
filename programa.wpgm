@@ -27,7 +27,7 @@ program juego {
 
   })
 
-  game.onTick(10000, "movimientoHaskell", {haskell.moverseAlAzar()})
+  game.onTick(500, "movimientoHaskell", {haskell.perseguir(ingeniero)})
 
 // no creo que esto esté bien pero no se me ocurrio otra forma
   game.onTick(100, "atacarEnSuPosicion", {haskell.atacarEnSuPosicion()})
