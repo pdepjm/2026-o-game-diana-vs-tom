@@ -3,14 +3,13 @@ import wollok.game.*
 
 class Proyectil {
     var property position
-    var property image = "p.proyectilHielo.png"
+    var property image = ["Uno_Claro.png","Cero_claro.png"].anyOne()
     const emisor     //quien  disparó 
     const direccion  //arriba, abajo, izquierda, derecha
     const velocidad = 80  
-    const danio= 50           // milisegundos por paso
+    const danio= 150     // milisegundos por paso
     //cada bala  tiene un nombre de tick diferente
-    const bala = "proyectil_" + self.identity().toString()
-
+    const bala = generadorDeBalas.siguienteId()
     method ataque() = danio
 method disparar() {
     game.addVisual(self)
@@ -19,13 +18,13 @@ method disparar() {
     
     game.onCollideDo(self, {objetivo => self.impactar(objetivo)}) // si choca un personaje
 }
-method impactar(objetivo){
-if (objetivo != emisor and objetivo != self) {
-      objetivo.recibirAtaque(self)
-      self.destruir()
+
+method impactar(objetivo) {
+    if (objetivo != emisor and objetivo != self) {
+        objetivo.recibirAtaque(self)
+        self.destruir()
     }
 }
-
 
 method avanzar() {
     const proximaPosicion = direccion.siguiente(position)
@@ -45,3 +44,11 @@ method destruir(){
     }
 }
 } 
+
+object generadorDeBalas {
+    var numero = 0;
+    method siguienteId(){
+        numero = numero + 1
+        return "bala_" + numero
+    }
+}

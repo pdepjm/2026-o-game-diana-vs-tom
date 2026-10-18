@@ -3,12 +3,13 @@ import enemigos.*
 import personaje.*
 import movimiento.*
 
-object ingeniero inherits Personaje(position = game.at(120, 20), vida = 1000) {
+object ingeniero inherits Personaje(position = game.at(120, 20), vida = 300) {
 
     override method morir() {
     super()
     game.removeTickEvent("cansancio")}
-
+  
+      
     override method image() =
     if (!self.estaVivo()) "caida.gif"
     else if (self.estaCaminando()) "final.gif"
@@ -40,6 +41,7 @@ object ingeniero inherits Personaje(position = game.at(120, 20), vida = 1000) {
     method sumarAtaque(cantidad) {
         ataque = ataque+cantidad
     }
+    
 }
 
 

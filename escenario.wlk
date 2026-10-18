@@ -1,5 +1,6 @@
 import ingeniero.*
 import modificadores.*
+import wollok.game.*
 
 class Obstaculo {
     var property position

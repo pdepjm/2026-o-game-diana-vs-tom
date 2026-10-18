@@ -17,11 +17,13 @@ class Enemigo inherits Personaje{
 
         game.addVisual(pantalla)
     }
+
+
+    
 }
 
-
 method perseguir(personaje) {
-    if (not terminado) {
+    if (not terminado and self.estaVivo()) {
         const diferenciaX = personaje.position().x() - position.x()
         const diferenciaY = personaje.position().y() - position.y()
 
@@ -55,13 +57,33 @@ method atacarEnSuPosicion() {
 }
 }
 
- object haskell inherits Enemigo(position = game.at(50, 50), vida = 3000){
-    override method image () = "haskell_enojado.png"
+
+
+object haskell inherits Enemigo(position = game.at(50, 50), vida = 500) {
+    override method image() = "haskell_enojado.png"
+
+    override method morir() {
+        if (self.estaVivo()) {
+            vivo = false
+            game.removeVisual(self)
+
+            const efecto = new EfectoVictoria(
+                position = position
+            )
+            game.addVisual(efecto)
+
+            game.schedule(3000, {
+                game.removeVisual(efecto)
+            })
+        }
+    }
+
     const ataque = 1000
-
     method ataque() = ataque
- }
+}
 
+
+ 
 class PantallaFinal {
     var property position
 
