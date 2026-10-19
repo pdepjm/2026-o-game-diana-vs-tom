@@ -8,7 +8,7 @@ class EfectoMuerte {
 class EfectoVictoria {
     var property position
 
-    method image() = "ganaste.gif"
+    method image() = "haskell_muerte4.gif"
 }
 class Personaje {
     var property position

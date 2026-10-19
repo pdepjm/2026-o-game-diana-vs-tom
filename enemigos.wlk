@@ -60,7 +60,7 @@ method atacarEnSuPosicion() {
 
 
 object haskell inherits Enemigo(position = game.at(50, 50), vida = 500) {
-    override method image() = "haskell_enojado.png"
+    override method image() = "Haskell_quieto1.png"
 
     override method morir() {
         if (self.estaVivo()) {
