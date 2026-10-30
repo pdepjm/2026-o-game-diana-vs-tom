@@ -18,8 +18,6 @@ class Enemigo inherits Personaje{
         game.addVisual(pantalla)
     }
 
-
-    
 }
 
 method perseguir(personaje) {
@@ -57,10 +55,31 @@ method atacarEnSuPosicion() {
 }
 }
 
-
-
 object haskell inherits Enemigo(position = game.at(50, 50), vida = 500) {
     override method image() = "Haskell_quieto1.png"
+
+    override method morir() {
+        if (self.estaVivo()) {
+            vivo = false
+            game.removeVisual(self)
+
+            const efecto = new EfectoVictoria(
+                position = position
+            )
+            game.addVisual(efecto)
+
+            game.schedule(3000, {
+                game.removeVisual(efecto)
+            })
+        }
+    }
+
+    const ataque = 1000
+    method ataque() = ataque
+}
+
+object prolog inherits Enemigo(position = game.at(50, 60), vida = 500) {
+    override method image() = "prolog.jpg"
 
     override method morir() {
         if (self.estaVivo()) {
