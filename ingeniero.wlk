@@ -9,7 +9,7 @@ object ingeniero inherits Personaje(position = game.at(120, 20), vida = 300) {
     var property ataque = 200
 
     override method prefijo() = "ingeniero"
-    method cantidadFrames() = 4
+    override method cantidadFrames() = 2
 
 
     override method morir() {
@@ -20,11 +20,6 @@ object ingeniero inherits Personaje(position = game.at(120, 20), vida = 300) {
         game.onTick(1000, "cansancio", { self.sueño(1) })
     }
 
-      
-    override method image() =
-    if (!self.estaVivo()) "caida.gif"
-    else if (self.estaCaminando()) "final.gif"
-    else "ingeniero_quieto.png"
 
 
     
