@@ -16,7 +16,7 @@ class Modificadores{
   }
 }
 
-//aca agregamos los objetos, faltaria hacer que aparezcan random creo
+
 object utnianos inherits Modificadores(position = game.at(60, 60), image = "utnianos.png") {
 
   override method serAgarradoPor(ingeniero) {
