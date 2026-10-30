@@ -1,14 +1,9 @@
 
 import wollok.game.*
 import escenario.*
-
+import posicionValida.*
 object movimiento {
 
-    // Límites del tablero
-    const limiteMinX = 1
-    const limiteMaxX = 140
-    const limiteMinY = 1
-    const limiteMaxY = 70
 
     method configurarFlechas(personaje) {
         keyboard.up().whilePressedDo({ personaje.mover(arriba) }, 400)
@@ -25,10 +20,7 @@ object movimiento {
     }
 
     // La posición tiene que estar dentro de los límites y sin obstáculo
-    method esPosicionValida(position) =
-        position.x() >= limiteMinX and position.x() <= limiteMaxX and
-        position.y() >= limiteMinY and position.y() <= limiteMaxY and
-        not sistemaDeObstaculos.estaOcupado(position)
+    method esPosicionValida(position) = posicionValida.esValida(position)
 }
 
 object izquierda {

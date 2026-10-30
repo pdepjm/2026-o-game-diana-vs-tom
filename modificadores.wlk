@@ -1,6 +1,7 @@
 
 import personaje.*
 import ingeniero.*
+import posicionValida.*
 
 
 class Modificadores{
@@ -12,7 +13,7 @@ class Modificadores{
     }
 
     method reubicar() {
-    position = game.at(0.randomUpTo(game.width()), 0.randomUpTo(game.height()))
+    position = posicionValida.aleatoria()
   }
 }
 
