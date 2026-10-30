@@ -33,18 +33,21 @@ object movimiento {
 
 object izquierda {
     method siguiente(position) = position.left(10)
+    method orientacion(actual, conVerticales) = "left"
 }
 
 object derecha {
     method siguiente(position) = position.right(10)
+    method orientacion(actual, conVerticales) = "right"
 }
 
 object abajo {
     method siguiente(position) = position.down(10)
+    method orientacion(actual, conVerticales) = if (conVerticales) "down" else actual
 }
 
 object arriba {
     method siguiente(position) = position.up(10)
+    method orientacion(actual, conVerticales) = if (conVerticales) "up" else actual
 }
-
 

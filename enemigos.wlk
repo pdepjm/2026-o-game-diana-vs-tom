@@ -78,8 +78,13 @@ object haskell inherits Enemigo(position = game.at(50, 50), vida = 500) {
     method ataque() = ataque
 }
 
+
 object prolog inherits Enemigo(position = game.at(50, 60), vida = 500) {
-    override method image() = "prolog.jpg"
+    override method prefijo() = "owl"
+
+    override method image() =
+        if (self.estaCaminando()) "owl_right_" + self.frame() + ".png"
+        else "owl_right_0.png"
 
     override method morir() {
         if (self.estaVivo()) {
@@ -100,8 +105,6 @@ object prolog inherits Enemigo(position = game.at(50, 60), vida = 500) {
     const ataque = 1000
     method ataque() = ataque
 }
-
-
  
 class PantallaFinal {
     var property position
