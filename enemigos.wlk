@@ -55,57 +55,30 @@ method atacarEnSuPosicion() {
 }
 }
 
-object haskell inherits Enemigo(position = game.at(50, 50), vida = 500) {
-    override method image() = "Haskell_quieto1.png"
-
-    override method morir() {
-        if (self.estaVivo()) {
-            vivo = false
-            game.removeVisual(self)
-
-            const efecto = new EfectoVictoria(
-                position = position
-            )
-            game.addVisual(efecto)
-
-            game.schedule(3000, {
-                game.removeVisual(efecto)
-            })
-        }
-    }
-
-    const ataque = 1000
-    method ataque() = ataque
-}
-
 
 object prolog inherits Enemigo(position = game.at(50, 60), vida = 500) {
     override method prefijo() = "owl"
 
+    // el búho se ve de frente: usa los mismos frames para los dos lados
     override method image() =
         if (self.estaCaminando()) "owl_right_" + self.frame() + ".png"
         else "owl_right_0.png"
 
-    override method morir() {
-        if (self.estaVivo()) {
-            vivo = false
-            game.removeVisual(self)
+    const ataque = 1000
+    method ataque() = ataque
+}
 
-            const efecto = new EfectoVictoria(
-                position = position
-            )
-            game.addVisual(efecto)
 
-            game.schedule(3000, {
-                game.removeVisual(efecto)
-            })
-        }
-    }
+object haskell inherits Enemigo(position = game.at(50, 50), vida = 500) {
+    override method prefijo() = "haskell"
+    override method tieneFramesMuerte() = true
 
     const ataque = 1000
     method ataque() = ataque
 }
- 
+
+
+
 class PantallaFinal {
     var property position
 

@@ -3,11 +3,16 @@ import proyectiles.*
 
 class EfectoMuerte {
     var property position
-}
+    const prefijo
+    var frame = 0
 
-class EfectoVictoria {
-    var property position
-    method image() = "haskell_muerte4.gif"
+    method image() = prefijo + "_muerte_" + frame + ".png"
+
+    method animar() {
+        game.schedule(500, { frame = 1 })
+        game.schedule(1000, { frame = 2 })
+        game.schedule(3000, { game.removeVisual(self) })
+    }
 }
 
 class Personaje {
@@ -42,6 +47,7 @@ class Personaje {
     method empezarACaminar() { caminando = true }
     method dejarDeCaminar() { caminando = false }
     method estaCaminando() = caminando
+    method tieneFramesMuerte() = false
 
     method mover(direccion) {
         direccionActual = direccion
@@ -76,13 +82,16 @@ class Personaje {
         vida = (vida - atacante.ataque()).max(0)
         if (vida == 0) { self.morir() }
     }
-
-    method morir() {
+method morir() {
+    if (vivo) {
         vivo = false
         game.removeVisual(self)
 
-        const efecto = new EfectoMuerte(position = position)
-        game.addVisual(efecto)
-        game.schedule(3000, { game.removeVisual(efecto) })
+        if (self.tieneFramesMuerte()) {
+            const efecto = new EfectoMuerte(position = position, prefijo = self.prefijo())
+            game.addVisual(efecto)
+            efecto.animar()
+        }
     }
+}
 }
