@@ -4,17 +4,25 @@ import ingeniero.*
 import posicionValida.*
 
 
-class Modificadores{
+class Modificadores {
     var property position
     var property image
 
-    method serAgarradoPor(ingeniero){
+    method serAgarradoPor(ingeniero) {
         game.removeVisual(self)
     }
 
     method reubicar() {
-    position = posicionValida.aleatoria()
-  }
+        position = posicionValida.aleatoria()
+    }
+
+    method activar() {
+        self.reubicar()
+        game.addVisual(self)
+        game.onCollideDo(self, { algo =>
+            if (algo == ingeniero) self.serAgarradoPor(ingeniero)
+        })
+    }
 }
 
 
