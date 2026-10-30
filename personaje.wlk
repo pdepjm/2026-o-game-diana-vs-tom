@@ -1,15 +1,20 @@
 import movimiento.*
 import proyectiles.*
+
 class EfectoMuerte {
     var property position
-   
 }
 
 class EfectoVictoria {
     var property position
-
     method image() = "haskell_muerte4.gif"
+   
 }
+
+/*object victoriaHaskell inherits EfectoVictoria{
+    override method image() = "haskell_muerte4.gif"
+}*/
+
 class Personaje {
     var property position
     var caminando = false
