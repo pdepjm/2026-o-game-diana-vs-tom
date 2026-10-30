@@ -5,10 +5,21 @@ import movimiento.*
 
 object ingeniero inherits Personaje(position = game.at(120, 20), vida = 300) {
 
+    var property energia = 1000
+    var property ataque = 200
+
+    override method prefijo() = "ingeniero"
+    method cantidadFrames() = 4
+
+
     override method morir() {
     super()
     game.removeTickEvent("cansancio")}
-  
+
+    method empezarACansarse() {
+        game.onTick(1000, "cansancio", { self.sueño(1) })
+    }
+
       
     override method image() =
     if (!self.estaVivo()) "caida.gif"
@@ -16,13 +27,7 @@ object ingeniero inherits Personaje(position = game.at(120, 20), vida = 300) {
     else "ingeniero_quieto.png"
 
 
-    var property energia = 1000
-    var property ataque = 200
-
-    method empezarACansarse() {
-        game.onTick(1000, "cansancio", { self.sueño(1) })
-    }
-
+    
     method sueño(cantidad) {
   energia = (energia - cantidad).max(0)
   self.modificarAtaque()
