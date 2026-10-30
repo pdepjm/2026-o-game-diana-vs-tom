@@ -21,31 +21,44 @@ class Enemigo inherits Personaje{
 }
 
 method perseguir(personaje) {
-    if (not terminado and self.estaVivo()) {
-        const diferenciaX = personaje.position().x() - position.x()
-        const diferenciaY = personaje.position().y() - position.y()
-
-        const direcciones = if (diferenciaX.abs() >= diferenciaY.abs()) {
-            if (diferenciaX > 0) [derecha, arriba, abajo, izquierda]
-            else [izquierda, arriba, abajo, derecha]
-        } else {
-            if (diferenciaY > 0) [arriba, derecha, izquierda, abajo]
-            else [abajo, derecha, izquierda, arriba]
-        }
-
-        const posibles = direcciones.filter({ direccion =>
-            movimiento.esPosicionValida(direccion.siguiente(position))
-        })
-
-        if (not posibles.isEmpty()) {
-            self.mover(posibles.first())
-        }
-
-        if (position == personaje.position()) {
+    if (self.puedeActuar()) {
+        self.acercarseA(personaje.position())
+        if (self.alcanzo(personaje)) {
             self.finalizarJuego()
         }
     }
 }
+
+method puedeActuar() = not terminado and self.estaVivo()
+
+method alcanzo(personaje) = position == personaje.position()
+
+method acercarseA(objetivo) {
+    const posibles = self.direccionesHacia(objetivo).filter({ direccion =>
+        movimiento.esPosicionValida(direccion.siguiente(position))
+    })
+    if (not posibles.isEmpty()) {
+        self.mover(posibles.first())
+    }
+}
+
+method direccionesHacia(objetivo) {
+    const diferenciaX = objetivo.x() - position.x()
+    const diferenciaY = objetivo.y() - position.y()
+
+    return if (diferenciaX.abs() >= diferenciaY.abs())
+        self.prioridadHorizontal(diferenciaX)
+    else
+        self.prioridadVertical(diferenciaY)
+}
+
+method prioridadHorizontal(diferenciaX) =
+    if (diferenciaX > 0) [derecha, arriba, abajo, izquierda]
+    else [izquierda, arriba, abajo, derecha]
+
+method prioridadVertical(diferenciaY) =
+    if (diferenciaY > 0) [arriba, derecha, izquierda, abajo]
+    else [abajo, derecha, izquierda, arriba]
 
    
 method atacarEnSuPosicion() {
@@ -83,4 +96,9 @@ class PantallaFinal {
     var property position
 
     method image() = "caida.gif"
+}
+
+object wollokEnemigo inherits Enemigo(position = game.at(60, 55), vida = 500) {
+    override method prefijo() = "wollok"
+    override method tieneFramesMuerte() = true
 }
