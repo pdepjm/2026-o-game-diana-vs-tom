@@ -38,6 +38,8 @@ program juego {
   game.onTick(700, "prolog.jpg", {prolog.perseguir(ingeniero)})
   game.onTick(500, "perseguirWollok", { wollokEnemigo.perseguir(ingeniero) })
 
+
+
 // no creo que esto esté bien pero no se me ocurrio otra forma
   game.onTick(100, "atacarEnSuPosicion", {haskell.atacarEnSuPosicion()})
 
