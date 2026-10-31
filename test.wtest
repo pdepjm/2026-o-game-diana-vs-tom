@@ -1,0 +1,77 @@
+import ingeniero.*
+import escenario.*
+import movimiento.*
+import personaje.*
+import modificadores.* 
+
+describe "Sistema de obstáculos" {
+
+    test "Una posición con un banco ocupado" { 
+        assert.that(sistemaDeObstaculos.estaOcupado(game.at(110,30)))
+    }
+
+    test "Una posición con una mesa esta ocupada" {
+        assert.that(sistemaDeObstaculos.estaOcupado(game.at(130,10)))
+    }
+
+    test "Una posición sin obstáculos esta libre" {
+        assert.notThat(sistemaDeObstaculos.estaOcupado(game.at(90,60)))
+    }
+}
+
+describe "Movimiento" {
+    
+    test"El ingeniero puede moverse a una posición libre" {
+        assert.that(movimiento.esPosicionValida(game.at(80,60)))
+
+}
+    test"El ingeniero no puede moverse a una posición ocupada" {
+        assert.notThat(movimiento.esPosicionValida(game.at(110,30)))
+    }
+
+    test"No puede moverse fuera del tablero" {
+        assert.notThat(movimiento.esPosicionValida(game.at(150,30)))
+    }
+}
+
+describe "Energía del ingeniero" {
+
+    test "El ingeniero comienza con 1000 de energía" {
+        assert.equals(1000, ingeniero.energia())
+    }
+
+    test "Sumar energía aumenta la energía en 100" {
+        const energiaInicial = ingeniero.energia()
+
+        ingeniero.sumarEnergia(100)
+
+        assert.equals(energiaInicial + 100, ingeniero.energia())
+    }
+}
+
+describe "Ataque del ingeniero" {
+
+    test "El ataque inicial es 200" {
+        assert.equals(200, ingeniero.ataque())
+    }
+
+    test "El ataque aumenta al sumar ataque" {
+        const ataqueInicial = ingeniero.ataque()
+
+        ingeniero.sumarAtaque(100)
+
+        assert.equals(ataqueInicial + 100, ingeniero.ataque())
+    }
+}
+
+describe "Muerte del personaje" {
+
+    test "El personaje deja de estar vivo al morir" {
+        ingeniero.morir()
+
+        assert.notThat(ingeniero.estaVivo())
+    }
+}
+
+
+

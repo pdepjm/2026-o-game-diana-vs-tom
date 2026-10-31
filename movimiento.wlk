@@ -1,67 +1,45 @@
-import escenario.*
 
 import wollok.game.*
-import ingeniero.*
-
+import escenario.*
+import posicionValida.*
 object movimiento {
 
-	//Limite del tablero, margenes
-    const limiteMinX = 1
-    const limiteMaxX = 140
-    const limiteMinY = 1
-    const limiteMaxY = 70
 
-    method configurarFlechas(visual){
-        //whilePresseDo
+    method configurarFlechas(personaje) {
+        keyboard.up().whilePressedDo({ personaje.mover(arriba) }, 400)
+        keyboard.down().whilePressedDo({ personaje.mover(abajo) }, 400)
+        keyboard.left().whilePressedDo({ personaje.mover(izquierda) }, 400)
+        keyboard.right().whilePressedDo({ personaje.mover(derecha) }, 400)
 
-//aca configuramos que si se toca una tecla de flecha, se mueve el personaje
-        keyboard.up().onPressDo{ self.mover(arriba,visual)}
-        keyboard.down().onPressDo{ self.mover(abajo,visual)}
-        keyboard.left().onPressDo{ self.mover(izquierda,visual)}
-        keyboard.right().onPressDo{ self.mover(derecha,visual)}
-    
-	
-//lo que hace es que dependiendo si lo tocas se activa el movimiento del personaje (gif)
- 		keyboard.up().onReleaseDo{ visual.dejarDeCaminar() }
-        keyboard.down().onReleaseDo{ visual.dejarDeCaminar() }
-        keyboard.left().onReleaseDo{ visual.dejarDeCaminar() }
-        keyboard.right().onReleaseDo{ visual.dejarDeCaminar() }
+        keyboard.up().onReleaseDo{ personaje.dejarDeCaminar() }
+        keyboard.down().onReleaseDo{ personaje.dejarDeCaminar() }
+        keyboard.left().onReleaseDo{ personaje.dejarDeCaminar() }
+        keyboard.right().onReleaseDo{ personaje.dejarDeCaminar() }
 
-	}
-	
-
-//aca definimos personaje por expresividad, tranquilamente podría haber sido ingeniero
-    method mover(direccion, personaje){
-        personaje.empezarACaminar() //activa la animacion
-        const nuevaPosicion = direccion.siguiente(personaje.position())
-        if (self.esPosicionValida(nuevaPosicion)) {
-            personaje.position(nuevaPosicion)
-        }
+        keyboard.space().whilePressedDo({personaje.disparar()}, 400)
     }
 
-// comprueba que la posición esté entre los límites y no tenga un obstáculo
-    method esPosicionValida(position) =
-        position.x() >= limiteMinX and position.x() <= limiteMaxX and
-        position.y() >= limiteMinY and position.y() <= limiteMaxY and
-        not(sistemaDeObstaculos.estaOcupado(position))
-
+    // La posición tiene que estar dentro de los límites y sin obstáculo
+    method esPosicionValida(position) = posicionValida.esValida(position)
 }
 
-
-object izquierda { 
-	method siguiente(position) = position.left(10) 
+object izquierda {
+    method siguiente(position) = position.left(10)
+    method orientacion(actual, conVerticales) = "left"
 }
 
-object derecha { 
-	method siguiente(position) = position.right(10) 
+object derecha {
+    method siguiente(position) = position.right(10)
+    method orientacion(actual, conVerticales) = "right"
 }
 
-object abajo { 
-	method siguiente(position) = position.down(10) 
+object abajo {
+    method siguiente(position) = position.down(10)
+    method orientacion(actual, conVerticales) = if (conVerticales) "down" else actual
 }
 
-object arriba { 
-	method siguiente(position) = position.up(10) 
+object arriba {
+    method siguiente(position) = position.up(10)
+    method orientacion(actual, conVerticales) = if (conVerticales) "up" else actual
 }
-
 

@@ -2,6 +2,10 @@ import escenario.*
 import wollok.game.*
 import ingeniero.*
 import movimiento.*
+import enemigos.*
+import proyectiles.* 
+import modificadores.*
+
 
 program juego {
   game.width(160)
@@ -9,24 +13,40 @@ program juego {
   game.cellSize(50)
   game.title("Juego")
 
+
   game.addVisual(ingeniero)
   movimiento.configurarFlechas(ingeniero)
   game.addVisual(banco1)
   game.addVisual(banco2)
   game.addVisual(mesa1)
   game.addVisual(mesa2)
-  game.addVisual(utnianos)
+
+  utnianos.activar()   
+  cafe.activar()
+
+
+  game.addVisual(haskell)
+  game.addVisual(prolog)
+  game.addVisual(wollokEnemigo)
+  
 
   game.boardGround('tablero.jpeg')
 
-  game.onCollideDo(ingeniero, { 
-   elemento => elemento.serAgarradoPor(ingeniero)
-   game.say(ingeniero, "Sume una energia")
-  })
+  
+
+  game.onTick(700, "movimientoHaskell", {haskell.perseguir(ingeniero)})
+  game.onTick(700, "prolog.jpg", {prolog.perseguir(ingeniero)})
+  game.onTick(500, "perseguirWollok", { wollokEnemigo.perseguir(ingeniero) })
+
+
+
+// no creo que esto esté bien pero no se me ocurrio otra forma
+  game.onTick(100, "atacarEnSuPosicion", {haskell.atacarEnSuPosicion()})
 
   game.start()
 
 }
+
 
 
 
