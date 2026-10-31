@@ -26,14 +26,14 @@ class Modificadores {
 }
 
 
-object utnianos inherits Modificadores(position = game.at(60, 60), image = "utnianos.png") {
+class Utnianos inherits Modificadores(position = game.at(60, 60), image = "utnianos.png") {
 
   override method serAgarradoPor(ingeniero) {
     ingeniero.sumarAtaque(100)  
     super(ingeniero)              
   }}
 
-object cafe inherits Modificadores(position = game.at(70, 70), image = "tazaCafe.png"){
+class Cafe inherits Modificadores(position = game.at(70, 70), image = "tazaCafe.png"){
     override method serAgarradoPor(ingeniero){
         ingeniero.sumarEnergia(100)
         super(ingeniero) // no logramos q se vea :c

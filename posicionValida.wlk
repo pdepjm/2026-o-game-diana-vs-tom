@@ -17,8 +17,8 @@ object posicionValida {
     //esto es para los modificadores asi no aparecen fuera del limite
     method aleatoria() {
         const candidata = game.at(
-            limiteMinX.randomUpTo(limiteMaxX + 1).truncate(0),
-            limiteMinY.randomUpTo(limiteMaxY + 1).truncate(0)
+            (limiteMinX / 10).randomUpTo((limiteMaxX / 10) + 1).truncate(0) * 10,
+            (limiteMinY / 10).randomUpTo((limiteMaxY / 10) + 1).truncate(0) * 10
         )
         return if (self.esValida(candidata)) candidata else self.aleatoria()
     }

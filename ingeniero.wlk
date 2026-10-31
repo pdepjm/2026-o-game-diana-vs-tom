@@ -2,6 +2,9 @@
 import enemigos.*
 import personaje.*
 import movimiento.*
+import Corazones.*
+import proyectiles.*
+import niveles.*
 
 object ingeniero inherits Personaje(position = game.at(120, 20), vida = 300) {
 
@@ -11,10 +14,18 @@ object ingeniero inherits Personaje(position = game.at(120, 20), vida = 300) {
     override method prefijo() = "ingeniero"
     override method cantidadFrames() = 2
 
+    override method imagenProyectil() = ["Uno_Claro.png","Cero_claro.png"].anyOne()
 
     override method morir() {
     super()
-    game.removeTickEvent("cansancio")}
+    game.removeTickEvent("cansancio")
+    gestorNiveles.perder()
+    }
+
+    override method recibirAtaque(atacante) {
+    super(atacante)
+    corazones.actualizar(vida)
+}
 
     method empezarACansarse() {
         game.onTick(1000, "cansancio", { self.sueño(1) })
@@ -42,6 +53,7 @@ object ingeniero inherits Personaje(position = game.at(120, 20), vida = 300) {
         ataque = ataque+cantidad
     }
     
+
 }
 
 

@@ -66,32 +66,45 @@ class Personaje {
         }
     }
 
-    method disparar() {
-        const proximaPos = direccionActual.siguiente(position)
-        if (movimiento.esPosicionValida(proximaPos)) {
-            const proyectil = new Proyectil(
-                position = proximaPos, // Un paso adelante
-                emisor = self,
-                direccion = direccionActual
-            )
-            proyectil.disparar()
+    method imagenProyectil() = ["Cero_claro.png", "Uno_Claro.png"].anyOne()
+
+    method disparar(){
+        if(self.estaVivo()){
+            const proximaPos = direccionActual.siguiente(position)
+            if (movimiento.esPosicionValida(proximaPos)) {
+                const proyectil = new Proyectil(
+                    image = self.imagenProyectil(),
+                    position = proximaPos, // Un paso adelante
+                    emisor = self,
+                    direccion = direccionActual
+                )
+                proyectil.disparar()
+            }
         }
+        
     }
 
-    method recibirAtaque(atacante) {
+   method recibirAtaque(atacante) {
         vida = (vida - atacante.ataque()).max(0)
-        if (vida == 0) { self.morir() }
-    }
-method morir() {
-    if (vivo) {
-        vivo = false
-        game.removeVisual(self)
 
-        if (self.tieneFramesMuerte()) {
-            const efecto = new EfectoMuerte(position = position, prefijo = self.prefijo())
-            game.addVisual(efecto)
-            efecto.animar()
+        if (vida == 0) {
+            self.morir()
         }
     }
-}
+
+    method morir() {
+        if (vivo) {
+            vivo = false
+            game.removeVisual(self)
+
+            if (self.tieneFramesMuerte()) {
+                const efecto = new EfectoMuerte(position = position, prefijo = self.prefijo())
+                game.addVisual(efecto)
+                efecto.animar()
+            }
+        }
+    }
+
+method vivo() = vivo
+
 }
