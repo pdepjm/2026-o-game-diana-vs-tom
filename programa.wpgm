@@ -6,7 +6,7 @@ import niveles.*
 program juego {
   game.width(160)
   game.height(90)
-  game.cellSize(50)
+  game.cellSize(10)
   game.title("Juego")
 
   game.boardGround("tablero.jpeg")
