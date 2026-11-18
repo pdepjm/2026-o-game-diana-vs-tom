@@ -1,5 +1,6 @@
 import movimiento.*
 import wollok.game.*
+import audio.*
 
 class Proyectil {
     var property position
@@ -20,6 +21,7 @@ class Proyectil {
         generadorDeBalas.registrar(self)
         game.addVisual(self)
         game.onTick(self.velocidad(), bala, {self.avanzar()})
+        audio.efecto(audio.sonidoDisparo())
 
         game.onCollideDo(self, {objetivo => self.impactar(objetivo)}) // si choca un personaje
     }

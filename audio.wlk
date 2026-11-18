@@ -5,13 +5,12 @@ object audio {
 
     var musicaActual = null
 
-   
-    method musicaAmbiente() = "musicaAmbiente.mp3"//ya ta
-    method sonidoDisparo() = "disparo.wav"//ya ta
-    method sonidoMuerteIngeniero() = "muerteIngeniero.wav"//ya ta
-    method sonidoVictoria() = "victoria.wav"//ya ta
+    method musicaMenu() = "musicaMenu.mp3"
+    method musicaNivel() = "musicaAmbiente.mp3"
+    method sonidoDisparo() = "disparo.wav"
+    method sonidoMuerteIngeniero() = "muerteIngeniero.wav"
+    method sonidoVictoria() = "victoria.wav"
 
-  
     method efecto(archivo) {
         self.efecto(archivo, 0.7)
     }
@@ -22,7 +21,6 @@ object audio {
         sonido.play()
     }
 
-    // musica de fondo en loop
     method musica(archivo) {
         self.detenerMusica()
         musicaActual = game.sound(archivo)
