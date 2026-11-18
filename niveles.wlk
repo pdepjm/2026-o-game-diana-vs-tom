@@ -83,8 +83,8 @@ class NivelHaskell inherits Nivel {
     const haskell = new Haskell(position = game.at(50, 50))
 
     override method enemigo() = haskell
-    override method fondo() = "tableroHaskell.jpeg"
-    override method imagenVictoria() = "pantallaVictoriaHaskell.png"
+    override method fondo() = "fondo_atardecer.png"
+    override method imagenVictoria() = "victoriaHaskell.png"
     override method velocidadPersecucion() = 700
     override method velocidadDisparo() = 1000
     override method obstaculos() = [
@@ -97,8 +97,8 @@ class NivelProlog inherits Nivel {
     const prolog = new Prolog(position = game.at(50, 50))
 
     override method enemigo() = prolog
-    override method fondo() = "tableroProlog.jpeg"
-    override method imagenVictoria() = "pantallaVictoriaProlog.png"
+    override method fondo() = "fondo_noche.png"
+    override method imagenVictoria() = "victoriaProlog.png"
     override method velocidadPersecucion() = 700
     override method velocidadDisparo() = 1000
     override method obstaculos() = [
@@ -111,8 +111,8 @@ class NivelWollok inherits Nivel {
     const wollokEnemigo = new WollokEnemigo(position = game.at(50, 50))
 
     override method enemigo() = wollokEnemigo
-    override method fondo() = "tableroWollok.jpeg"
-    override method imagenVictoria() = "pantallaVictoriaWollok.png"   // además cierra el juego: "aprobaste la materia"
+    override method fondo() = "fondo_aula_deteriorada.png"
+    override method imagenVictoria() = "victoriaWollok.png"   // además cierra el juego: "aprobaste la materia"
     override method velocidadPersecucion() = 700
     override method velocidadDisparo() = 1000
     override method obstaculos() = [
@@ -173,7 +173,7 @@ object gestorNiveles {
     method mostrarInicio() {
         estado = estadoInicio
         numeroDeNivel = 1
-        self.mostrarPantalla("pantallaInicio.png")
+        self.mostrarPantalla("pantallaDeInicio.png")
         game.schedule(300, { if (estado == estadoInicio) audio.musica(audio.musicaMenu()) })
     }
 
@@ -198,7 +198,7 @@ object gestorNiveles {
             nivel.detenerAcciones()
             generadorDeBalas.limpiar()
             audio.detenerMusica()
-            // se espera a que termine la animacion de muerte del enemigo
+            //se espera a que termine la animacion de muerte del enemigo
             game.schedule(nivel.enemigo().duracionMuerte(), { self.mostrarVictoria() })
         }
     }
