@@ -244,7 +244,7 @@ object gestorNiveles {
     method mostrarDerrota() {
         nivel.limpiar()
         estado = estadoDerrota
-        self.mostrarPantalla("pantallaDerrota.png")
+        self.mostrarPantalla("pantallaDerrota.jpg")
     }
 
 
