@@ -6,12 +6,10 @@ object audio {
     var musicaActual = null
 
    
-    method musicaMenu() = "musicaMenu.mp3"
-    method musicaNivel() = "musicaNivel.mp3"
-    method sonidoDisparo() = "disparo.wav"
-    method sonidoMuerteIngeniero() = "muerteIngeniero.wav"
-    method sonidoMuerteEnemigo() = "muerteEnemigo.wav"
-    method sonidoVictoria() = "victoria.wav"
+    method musicaAmbiente() = "musicaAmbiente.mp3"//ya ta
+    method sonidoDisparo() = "disparo.wav"//ya ta
+    method sonidoMuerteIngeniero() = "muerteIngeniero.wav"//ya ta
+    method sonidoVictoria() = "victoria.wav"//ya ta
 
   
     method efecto(archivo) {
