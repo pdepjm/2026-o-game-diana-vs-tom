@@ -1,48 +1,27 @@
-import escenario.*
 import wollok.game.*
 import ingeniero.*
 import movimiento.*
-import enemigos.*
-import proyectiles.* 
-import modificadores.*
-import Corazones.*
-
 import niveles.*
+
 program juego {
   game.width(160)
   game.height(90)
   game.cellSize(50)
   game.title("Juego")
 
+  game.boardGround("tablero.jpeg")
+
+  // el ingeniero solo responde mientras si esta jugando)
   movimiento.configurarFlechas(ingeniero)
-  game.addVisual(banco1)
-  game.addVisual(banco2)
-  game.addVisual(mesa1)
-  game.addVisual(mesa2)
 
-  corazones.inicializar()
-/*
-  game.addVisual(haskell)
-  game.addVisual(prolog)
-  game.addVisual(wollokEnemigo)
-  */
+ 
+  keyboard.enter().onPressDo({ gestorNiveles.enterPresionado() })
 
-  game.boardGround('tablero.jpeg')
-
-  gestorNiveles.iniciar()
-
- /* game.onTick(700, "movimientoHaskell", {haskell.perseguir(ingeniero)})
-  game.onTick(700, "prolog.jpg", {prolog.perseguir(ingeniero)})
-  game.onTick(500, "perseguirWollok", { wollokEnemigo.perseguir(ingeniero) })
-*/
-
-
-
+ 
+  gestorNiveles.mostrarInicio()
 
   game.start()
-
 }
-
 
 
 

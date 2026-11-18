@@ -4,28 +4,36 @@ import personaje.*
 import ingeniero.*
 import proyectiles.*
 import niveles.*
+import audio.*
 import wollok.game.*
+
 class Enemigo inherits Personaje{
 
     var terminado = false
 
     override method imagenProyectil() = "disparoEnemigo.png"
 
-   method perseguir(personaje) {
-    if (self.puedeActuar()) {
-        if (self.alcanzo(personaje)) {
-            personaje.recibirAtaque(self)
-        } else {
-            self.acercarseA(personaje.position())
+    // cuanto dura la animacion de muerte antes de mostrar la pantalla de victoria
+    method duracionMuerte() = if (self.tieneFramesMuerte()) 3200 else 800
+
+    method perseguir(personaje) {
+        if (self.puedeActuar()) {
+            if (self.alcanzo(personaje)) {
+                personaje.recibirAtaque(self)
+            } else {
+                self.acercarseA(personaje.position())
+            }
         }
     }
-}
-    
- override method morir() {
-    super()
-   game.say(ingeniero, "Tocá ENTER para pasar de nivel!!")
-    gestorNiveles.completarNivel()
+
+    override method morir() {
+        if (self.estaVivo()) {
+            super()
+            audio.efecto(audio.sonidoMuerteEnemigo())
+            gestorNiveles.nivelSuperado()
+        }
     }
+
     method puedeActuar() = not terminado and self.estaVivo()
 
     method alcanzo(personaje) = position == personaje.position()
@@ -57,11 +65,12 @@ class Enemigo inherits Personaje{
         if (diferenciaY > 0) [arriba, derecha, izquierda, abajo]
         else [abajo, derecha, izquierda, arriba]
 
+    // un enemigo muerto ya no ataca
     method atacarEnSuPosicion() {
-    if (not terminado and position == ingeniero.position()) {
-        ingeniero.recibirAtaque(self)
+        if (self.puedeActuar() and position == ingeniero.position()) {
+            ingeniero.recibirAtaque(self)
+        }
     }
-}
 }
 
 
@@ -88,11 +97,7 @@ class Haskell inherits Enemigo(position = game.at(50, 50), vida = 1) {
 class WollokEnemigo inherits Enemigo(position = game.at(60, 50), vida = 50) {
     override method prefijo() = "wollok"
     override method tieneFramesMuerte() = true
-    override method morir() {
-        super()
-        game.say(ingeniero, "Completaste el juego!")
-        gestorNiveles.perder()
-    }
+
     const ataque = 50
     method ataque() = ataque
 }

@@ -1,5 +1,6 @@
 import movimiento.*
 import proyectiles.*
+import wollok.game.*
 
 class EfectoMuerte {
     var property position
@@ -68,6 +69,9 @@ class Personaje {
 
     method imagenProyectil() = ["Cero_claro.png", "Uno_Claro.png"].anyOne()
 
+
+    method sonarDisparo() { }
+
     method disparar(){
         if(self.estaVivo()){
             const proximaPos = direccionActual.siguiente(position)
@@ -79,12 +83,12 @@ class Personaje {
                     direccion = direccionActual
                 )
                 proyectil.disparar()
+                self.sonarDisparo()
             }
         }
-        
     }
 
-   method recibirAtaque(atacante) {
+    method recibirAtaque(atacante) {
         vida = (vida - atacante.ataque()).max(0)
 
         if (vida == 0) {
@@ -105,6 +109,13 @@ class Personaje {
         }
     }
 
-method vivo() = vivo
+    // vuelve a la vida para reintentar nivel
+    method revivir(nuevaVida) {
+        vivo = true
+        vida = nuevaVida
+        caminando = false
+    }
+
+    method vivo() = vivo
 
 }

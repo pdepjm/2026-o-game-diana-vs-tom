@@ -1,7 +1,9 @@
+import wollok.game.*
+
 class Corazon {
     var property position
     var property imagen
-    var visible = true
+    var visible = false   // arranca sin estar en el tablero
 
     method image() = imagen
 
@@ -26,26 +28,31 @@ class Corazon {
 
 object corazones {
 
-   const corazon1 = new Corazon(
-    position = game.at(130, 85),
-    imagen = "Corazon_Lleno.png"
-)
+    const corazon1 = new Corazon(
+        position = game.at(130, 85),
+        imagen = "Corazon_Lleno.png"
+    )
 
-const corazon2 = new Corazon(
-    position = game.at(140, 85),
-    imagen = "Corazon_Lleno.png"
-)
+    const corazon2 = new Corazon(
+        position = game.at(140, 85),
+        imagen = "Corazon_Lleno.png"
+    )
 
-const corazon3 = new Corazon(
-    position = game.at(150, 85),
-    imagen = "Corazon_Lleno.png"
-)
+    const corazon3 = new Corazon(
+        position = game.at(150, 85),
+        imagen = "Corazon_Lleno.png"
+    )
 
-    method inicializar() {
-        game.addVisual(corazon1)
-        game.addVisual(corazon2)
-        game.addVisual(corazon3)
-        self.actualizar(300)
+ 
+    method mostrar(vida) {
+        self.actualizar(vida)
+    }
+
+    // Se llama al terminar el nivel 
+    method ocultar() {
+        corazon1.ocultar()
+        corazon2.ocultar()
+        corazon3.ocultar()
     }
 
     method actualizar(vida) {
