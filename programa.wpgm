@@ -1,0 +1,27 @@
+import wollok.game.*
+import ingeniero.*
+import movimiento.*
+import niveles.*
+
+program juego {
+  game.width(160)
+  game.height(90)
+  game.cellSize(10)
+  game.title("Juego")
+
+  game.boardGround("fondo_atardecer.png")
+
+  // el ingeniero solo responde mientras si esta jugando)
+  movimiento.configurarFlechas(ingeniero)
+
+ 
+  keyboard.enter().onPressDo({ gestorNiveles.enterPresionado() })
+
+ 
+  gestorNiveles.mostrarInicio()
+
+  game.start()
+}
+
+
+

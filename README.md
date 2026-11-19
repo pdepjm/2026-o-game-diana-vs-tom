@@ -1,5 +1,7 @@
-### [Nombre del juego]
+# The Binding of Ingeniero 
 
-* Integrante 1
-* Integrante 2
-* Etc...
+* Abril Carabes
+* Agustin Nuñez
+* Delfina Panzini
+* Lautaro Shirao
+* Florencia Taborda
