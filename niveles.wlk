@@ -19,11 +19,16 @@ class CaidaIngeniero {
     method image() = "caida.gif"
 }
 
+class Fondo {
+    const property image
+    var property position = game.at(0, 0)
+}
 
 class Nivel {
     const cafe = new Cafe()
     const utnianos = new Utnianos()
     var accionesActivas = false
+    var fondoVisual = null
 
     method enemigo()
     method fondo()              // imagen del tablero de este nivel
@@ -53,7 +58,8 @@ class Nivel {
     }
 
     method prepararEscena() {
-        game.boardGround(self.fondo())
+        fondoVisual = new Fondo(image = self.fondo())
+        game.addVisual(fondoVisual)
         sistemaDeObstaculos.cargar(self.obstaculos())
     }
 
@@ -73,6 +79,8 @@ class Nivel {
         generadorDeBalas.limpiar()
         sistemaDeObstaculos.limpiar()
         corazones.ocultar()
+        self.quitar(fondoVisual)
+        fondoVisual = null
         [ingeniero, self.enemigo(), cafe, utnianos].forEach({ visual => self.quitar(visual) })
     }
 
