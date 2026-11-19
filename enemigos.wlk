@@ -29,7 +29,7 @@ class Enemigo inherits Personaje{
     override method morir() {
         if (self.estaVivo()) {
             super()
-            audio.efecto(audio.sonidoMuerteEnemigo())
+            audio.efecto(audio.sonidoMuerteIngeniero())
             gestorNiveles.nivelSuperado()
         }
     }

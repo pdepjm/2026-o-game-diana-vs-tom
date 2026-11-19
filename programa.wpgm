@@ -9,7 +9,7 @@ program juego {
   game.cellSize(10)
   game.title("Juego")
 
-  game.boardGround("tablero.jpeg")
+  game.boardGround("fondo_atardecer.png")
 
   // el ingeniero solo responde mientras si esta jugando)
   movimiento.configurarFlechas(ingeniero)

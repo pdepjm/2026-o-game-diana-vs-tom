@@ -37,8 +37,7 @@ class Nivel {
     method banco(x, y) = new Obstaculo(position = game.at(x, y), image = "banco1.png")
 
     method iniciar() {
-        game.boardGround(self.fondo())
-        sistemaDeObstaculos.cargar(self.obstaculos())  
+        self.prepararEscena()
         game.addVisual(ingeniero)
         game.addVisual(self.enemigo())
         corazones.mostrar(ingeniero.vida())
@@ -53,7 +52,12 @@ class Nivel {
         audio.musica(self.musica())
     }
 
-   
+    method prepararEscena() {
+        game.boardGround(self.fondo())
+        sistemaDeObstaculos.cargar(self.obstaculos())
+    }
+
+
     method detenerAcciones() {
         if (accionesActivas) {
             accionesActivas = false
@@ -185,6 +189,9 @@ object gestorNiveles {
     }
 
     method empezarNivel() {
+        if (nivel != null) {
+            nivel.limpiar()
+        }
         nivel = self.crearNivel()
         estado = estadoJugando
         ingeniero.volverAlInicio()
@@ -214,7 +221,8 @@ object gestorNiveles {
     method avanzar() {
         self.quitarPantalla()
         if (self.esUltimoNivel()) {
-            self.mostrarInicio()          
+            self.mostrarInicio()
+        } else {
             numeroDeNivel = numeroDeNivel + 1
             self.empezarNivel()
         }
